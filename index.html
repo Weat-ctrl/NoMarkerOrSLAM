@@ -5,22 +5,35 @@
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
 </head>
+
 <body style="margin:0; overflow:hidden;">
-  <button id="spawnBtn" style="position:fixed; bottom:15px; left:50%; transform:translateX(-50%); z-index:999; padding:10px 18px;">
-    Spawn Object
-  </button>
+<button id="spawnBtn" style="position:fixed; bottom:15px; left:50%;
+transform:translateX(-50%); z-index:999; padding:10px 20px; background:yellow;">
+SHOW OBJECT
+</button>
 
-  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-    <a-entity id="obj" position="0 0 -1" visible="false">
-      <a-box color="orange" depth="0.3" height="0.3" width="0.3"></a-box>
-    </a-entity>
-    <a-camera-static></a-camera-static>
-  </a-scene>
+<a-scene embedded
+         vr-mode-ui="enabled: false"
+         renderer="logarithmicDepthBuffer: true; antialias: true;"
+         arjs="sourceType:webcam; debugUIEnabled:false;">
 
-  <script>
-    document.getElementById("spawnBtn").onclick = () => {
-      document.getElementById("obj").setAttribute("visible", "true");
-    }
-  </script>
+  <!-- BIG, BRIGHT, ROTATING object for visibility -->
+  <a-entity id="obj" visible="false"
+            position="0 0 -1"
+            animation="property: rotation; to: 0 360 0; loop: true; dur: 2000">
+    <a-box color="#FF0000" depth="0.7" height="0.7" width="0.7"></a-box>
+  </a-entity>
+
+  <a-camera-static></a-camera-static>
+</a-scene>
+
+<script>
+document.getElementById("spawnBtn").onclick = () => {
+  const obj = document.getElementById("obj");
+  obj.setAttribute("visible", "true");
+  alert("Object set visible");
+};
+</script>
+
 </body>
-  </html>
+</html>
